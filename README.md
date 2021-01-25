@@ -22,20 +22,22 @@ with an Android device. If not one, the other will work for sure. But our main g
 
 ![alt text](https://github.com/afaqirz67/ProjectRobo-A/blob/main/images/Hexapod-3D-Model-768x432.jpg?raw=true)
 
+![alt text](https://github.com/afaqirz67/ProjectRobo-A/blob/main/images/Arduino-Hexapod-Ant-Robot-Circuit-Diagram.png?raw=true)
+
 Visuals from:
 Dejan, et al. “Arduino Ant Hexapod Robot.” HowToMechatronics, 7 Jan. 2021, howtomechatronics.com/projects/arduino-ant-hexapod-robot/. 
 
 
 ## Components needed for this project:
 
-MG996R Servo Motor X 21
-SG90 Micro Servo Motor 
-Arduino Mega Board
-3S LiPo Battery 
-DC-DC Buck Converter
-HC-05 Bluetooth Module
-Wifi Shield
-RGB LED X 2
+MG996R Servo Motor X 21 -
+SG90 Micro Servo Motor -
+Arduino Mega Board - 
+3S LiPo Battery - 
+DC-DC Buck Converter - 
+HC-05 Bluetooth Module - 
+Wifi Shield - 
+RGB LED X 2 -
 
 ## Deadlines
 
