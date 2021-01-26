@@ -27,6 +27,9 @@ with an Android device. If not one, the other will work for sure. But our main g
 Visuals from:
 Dejan, et al. “Arduino Ant Hexapod Robot.” HowToMechatronics, 7 Jan. 2021, howtomechatronics.com/projects/arduino-ant-hexapod-robot/. 
 
+ ![Tux, the Linux mascot](https://github.com/afaqirz67/ProjectRobo-A/blob/main/images/pd1.jpg?raw=true)
+
+![alt text](https://github.com/afaqirz67/ProjectRobo-A/blob/main/images/pdraw.jpg?raw=true)
 
 ## Components needed for this project:
 
