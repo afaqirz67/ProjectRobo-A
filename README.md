@@ -33,14 +33,17 @@ Dejan, et al. “Arduino Ant Hexapod Robot.” HowToMechatronics, 7 Jan. 2021, h
 
 ## Components needed for this project:
 
-MG996R Servo Motor X 21 -
-SG90 Micro Servo Motor -
-Arduino Mega Board - 
-3S LiPo Battery - 
-DC-DC Buck Converter - 
-HC-05 Bluetooth Module - 
-Wifi Shield - 
-RGB LED X 2 -
+MG996R Servo Motor X 21 
+
+SG90 Micro Servo Motor 
+
+Arduino Mega Board 
+
+3S LiPo Battery 
+
+DC-DC Buck Converter 
+
+HC-05 Bluetooth Module  
 
 ## Deadlines
 
@@ -50,3 +53,37 @@ Designing the parts, 3d printing, and assembling them.
 
 
 ![alt text](https://github.com/afaqirz67/ProjectRobo-A/blob/main/images/Project%20Robo-A%20deadlines.png?raw=true)
+
+
+## Change in plan
+After some time and thinking about the desired output and the required input, I have come to the idea that my planning for the robot's interior design should be changed. The 
+change is caused by the fact that using a bluetooth shield in my design would require an Android device and app to control the and send signals to the robot's reciever. I wanted 
+my robot to be able to communicate with IOS devices and apps. To solve this issue, I thought of using a wifi shield and be able to control the robot with an IOS device, but it
+seemed that controlling the robot with a wifi would have slowed than the process of sending and recieving signals between the robot and the controller. For this issue to be
+solved, I chose to use an ESP32 microcontroller rather than the a wifi shield. I will be using using bluetooth for communication, which will provide the communication rate a 
+reasonable speed. Moreover, I will still be able to use an IOS device and app to control the robot. Obviously this change in design will effect the other parts too. The ESP32
+microcontroller will be replacing the Arduino Mega board, but there would be another issue caused by that. The ESP32 won't be able to replace the Mega board by itself because it 
+doesn't have the capability of controlling 22 servos. In order to solve this issue, I will be using servo drivers. The specific board would be the Adafruit 16-Channel 12-bit
+PWM/Servo Driver which has the capability of running 16 servos, so I'll be using two of them. A buck converter would be needed to convert the power to 3.3 for the ESP32
+board. And the servos will be powerd by both the ESP board and the servo drivers which each recieve 6v of power. The last change would be the battery. For this design I would be
+using 4 double A batteries to power up the servos and the boards. Moreover, the customization of the boards will cause a change in the robots inerior part design, so that the 
+new boards can fit in it easily. A battery holder will be placed in the bottom part of the body, so that replacing the battries wouldn't require any extra work. The flowchart
+below shows a better picture of what this design looks like. 
+
+
+![alt text](https://github.com/afaqirz67/ProjectRobo-A/blob/main/images/flow-chart-planning.png?raw=true)
+
+## New list of needed components
+[Servo Driver x2](https://www.adafruit.com/product/815)
+
+[Esp32 microcontroller](https://www.adafruit.com/product/4769)
+
+MG996R Servo Motor X 21
+
+SG90 Micro Servo Motor
+
+[3.3v Voltage Regulator](https://www.adafruit.com/product/4683) 
+
+Double a battery mount
+
+Double A battries  x4+ 
