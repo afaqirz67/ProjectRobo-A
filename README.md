@@ -86,4 +86,10 @@ SG90 Micro Servo Motor
 
 Double a battery mount
 
-Double A battries  x4+ 
+Double A battries  x 4+ 
+
+Flathead M3 bolts 12 or 14mm length x 200
+
+M3 lock nuts x 200
+
+M4 bolts and nuts and washers x 15
