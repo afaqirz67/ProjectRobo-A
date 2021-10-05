@@ -95,3 +95,14 @@ M3 lock nuts x 200
 M4 bolts and nuts and washers x 15
 
 [Logic Level Converter](https://www.sparkfun.com/products/12009)
+
+
+## Pictures of final CAD design
+The design of particular parts, especially the interior, had to be changed due to the changes of microcontrollers inside. The space inside was modified to place in the AA 
+battery pack, servo drivers, ESP-32, and the breadboard accordingly.
+
+![Robo-A full ](https://user-images.githubusercontent.com/56890879/135955293-255680c7-2bed-497a-92ce-4f4a4916a33f.png)
+
+![roboA](https://user-images.githubusercontent.com/56890879/135955348-a9b5378b-156d-45b3-9b89-4e940c9589e2.png)
+
+
