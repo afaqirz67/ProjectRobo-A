@@ -107,7 +107,7 @@ battery pack, servo drivers, ESP-32, and the breadboard accordingly.
 
 
 ## Code
-# Still in progress
+Still in progress...
 
 ```C
 #include <Wire.h>
