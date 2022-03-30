@@ -105,7 +105,20 @@ battery pack, servo drivers, ESP-32, and the breadboard accordingly.
 
 ![roboA](https://user-images.githubusercontent.com/56890879/135955348-a9b5378b-156d-45b3-9b89-4e940c9589e2.png)
 
+## Change in plan
+We need to switch to more powerful batteries because the AA batteries could not supply enough current to keep the servos running. Instead we are going to use a 7.4v 
+lipo battery with 5200 mah of current & a discharge rate of 50C. This battery will be able to meet the demands of the servos. The thing we had accounted for last time 
+was that the servos draw current even when they are not running, but that wasn't the issue as it was drawing only 7mA. The issue was when the servos would get close
+to their stall current & it would be reasonable to think that because the robot is heavy. The stall current of the servos we are using is 1100mA. Multiply that to 22 
+servos and it would drastically exceed the amount of current the AA batteries can supply at once. Even if 3 legs are running at a time - the rest of the legs are still 
+drawing current since they are under load. Therefore we are using a lipo battery with higher ampere and higher discharge rate so that it meets the needs. 
 
+Since we'll be using a 7.4v battery and we only need 5-6 volts of power, we'll be using a 6-40V to 1.2-36V 20A voltage regulator, so the battery only supplies the 
+exact amount of power needed.
+
+[Battery](https://www.amazon.com/POVWAY-Battery-5200mAh-Trucks-Vehicles/dp/B08RYNT234/ref=sr_1_26?crid=24WYA8KKDSMCX&keywords=2s+lipo&qid=1648590463&sprefix=2s+lipo%2Caps%2C87&sr=8-26)
+
+[Voltage Regulator](https://www.amazon.com/Anmbest-Converter-Adjustable-Regulator-Protection/dp/B07R832BRX/ref=sr_1_2?crid=SE93U8ZM74VY&keywords=24+amp+5v+regulator&qid=1648590895&sprefix=24+amps+5v+regulator%2Caps%2C104&sr=8-2)
 ## Code
 Still in progress...
 
