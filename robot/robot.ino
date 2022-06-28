@@ -107,9 +107,9 @@ struct Leg leg1 = {
     {
         // Frames
         {
-            {20, 90, 90},
-            {35, 90, 90},
-            {50, 90, 90},
+            {10, 30, 90},
+            {25, 45, 90},
+            {40, 65, 90},
         },
         // Timing
         {1000000, 1000000, 2000000},
@@ -119,6 +119,29 @@ struct Leg leg1 = {
     // counter
     0,
 };
+
+/*struct Leg leg3 = {
+  // Servo indices
+  {19, 20 ,21},
+  // Animation
+  {
+
+    // Frames
+   {  
+    {10, 90, 90},
+    {25, 90, 90},
+    {40, 90, 90},
+    },
+    //Timing
+    {1000000, 1000000, 2000000},
+    },
+    // state
+    0,
+    // counter
+    0,
+  };
+  */
+
 
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
@@ -277,5 +300,7 @@ void loop()
 
   int change = now - last;
   leg1.counter += change;
+  //leg3.counter += change;
   outputLeg(&leg1);
+  //outputLeg(&leg3);
 }
