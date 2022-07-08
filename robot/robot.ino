@@ -107,9 +107,9 @@ struct Leg leg1 = {
     {
         // Frames
         {
-            {10, 30, 90},
-            {25, 45, 90},
-            {40, 65, 90},
+            {0, 30, 90},
+            {15, 45, 90},
+            {30, 65, 90},
         },
         // Timing
         {1000000, 1000000, 2000000},
@@ -120,7 +120,7 @@ struct Leg leg1 = {
     0,
 };
 
-/*struct Leg leg3 = {
+struct Leg leg3 = {
   // Servo indices
   {19, 20 ,21},
   // Animation
@@ -140,7 +140,7 @@ struct Leg leg1 = {
     // counter
     0,
   };
-  */
+  
 
 
 // You should get Auth Token in the Blynk App.
@@ -206,6 +206,8 @@ void setup()
 {
   pinMode(LED_BUILTIN, OUTPUT);
   computeTransitions(&leg1.animation);
+  //computeTransitions(&leg3.animation);
+
   // Debug console
   Serial.begin(9600);
   Serial.println("Waiting for connections...");
@@ -288,6 +290,7 @@ void outputLeg(struct Leg *leg)
 
 void loop()
 {
+  Serial.println("working...");
   if (last == 0)
   {
     last = micros();
@@ -300,7 +303,7 @@ void loop()
 
   int change = now - last;
   leg1.counter += change;
-  //leg3.counter += change;
+  leg3.counter += change;
   outputLeg(&leg1);
-  //outputLeg(&leg3);
+  outputLeg(&leg3);
 }
