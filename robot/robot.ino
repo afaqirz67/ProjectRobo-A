@@ -1,6 +1,27 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
+#define __DEBUG
+
+#ifdef __PROFILE
+#define profile(name,thing) ({ \
+  int start = micros(); \
+  thing; \
+  int end = micros(); \
+  Serial.println(name); \
+  Serial.println(end - start); \
+  thing; \
+})
+#else
+#define profile(name,thing) (thing)
+#endif
+
+#ifdef __DEBUG
+#define debug(text, value) Serial.print(text); Serial.println(value)
+#else
+#define debug(text, value)
+#endif
+
 #define BLYNK_PRINT Serial
 #define BLYNK_USE_DIRECT_CONNECT
 #include <BlynkSimpleEsp32_BLE.h>
@@ -73,7 +94,6 @@ struct AnimationFrame computeState(struct Animation animation, int *ctr)
     }
     tmpCtr -= thisTime;
   }
-  Serial.println(frame);
   // state -> last keyframe/transition
   struct AnimationFrame lastKey = animation.frames[frame];
   struct AnimationTransition trans = animation.transitions[frame];
@@ -106,13 +126,13 @@ struct Leg leg1 = {
     // Animation
     {
         // Frames
-        {
-            {0, 30, 90},
-            {15, 45, 90},
-            {30, 65, 90},
+     {
+            {20, 45, 55},
+            {30, 55, 55},
+            {40, 45, 55},
         },
         // Timing
-        {1000000, 1000000, 2000000},
+        {1000000, 500000, 1000000},
     },
     // state
     0,
@@ -120,7 +140,7 @@ struct Leg leg1 = {
     0,
 };
 
-struct Leg leg3 = {
+struct Leg leg5 = {
   // Servo indices
   {19, 20 ,21},
   // Animation
@@ -128,12 +148,12 @@ struct Leg leg3 = {
 
     // Frames
    {  
-    {10, 90, 90},
-    {25, 90, 90},
-    {40, 90, 90},
+    {15, 35, 80},
+    {25, 45, 80},
+    {35, 35, 80},
     },
     //Timing
-    {1000000, 1000000, 2000000},
+    {1000000, 500000, 1000000},
     },
     // state
     0,
@@ -194,7 +214,10 @@ uint8_t servonum = 0;
 void setAngle(
     int servoNum,
     uint8_t degrees)
+
 {
+  debug("servo ",servoNum);
+  debug("degrees ",degrees);
   Adafruit_PWMServoDriver p;
   int n;
   findServo(servoNum, &p, &n);
@@ -206,10 +229,10 @@ void setup()
 {
   pinMode(LED_BUILTIN, OUTPUT);
   computeTransitions(&leg1.animation);
-  //computeTransitions(&leg3.animation);
+  computeTransitions(&leg5.animation);
 
   // Debug console
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("Waiting for connections...");
   Blynk.setDeviceName("Blynk");
 
@@ -290,7 +313,6 @@ void outputLeg(struct Leg *leg)
 
 void loop()
 {
-  Serial.println("working...");
   if (last == 0)
   {
     last = micros();
@@ -302,8 +324,11 @@ void loop()
   now = micros();
 
   int change = now - last;
+  debug("loop time", change);
   leg1.counter += change;
-  leg3.counter += change;
-  outputLeg(&leg1);
-  outputLeg(&leg3);
+  leg5.counter += change;
+  profile("leg1", outputLeg(&leg1));
+  profile("leg5", outputLeg(&leg5));
+
+  //outputLeg(&leg3);
 }
