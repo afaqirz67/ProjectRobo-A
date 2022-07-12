@@ -96,7 +96,8 @@ void setAngle(
   p.setPWM(n, 0, pulselength);
 }
 
-void computeLegAnimations(struct Leg* leg) {
+void computeLegAnimations(struct Leg *leg)
+{
   computeTransitions(&leg->animation);
 }
 
