@@ -30,8 +30,9 @@ int main(void) {
 			legs[l]->counter += 1000;
 			struct Animation anim = legs[l]->animation;
 			struct AnimationFrame frame = computeState(anim, &legs[l]->counter);
+			printf("leg %d\n", l);
 			for(int s = 0; s < SERVO_LEN; s++) {
-				printf("leg %d, servo %d: %g\n", l, s, frame.servos[s]);
+				printf("\tservo %d: %g\n", s, frame.servos[s]);
 			}
 		}
 	}
