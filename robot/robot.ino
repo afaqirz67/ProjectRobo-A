@@ -97,7 +97,7 @@ void setAngle(
 }
 
 void computeLegAnimations(struct Leg* leg) {
-  computeTransitions(&leg1->animation);
+  computeTransitions(&leg->animation);
 }
 
 void setup()
