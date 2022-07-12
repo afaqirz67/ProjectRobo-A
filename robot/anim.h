@@ -1,6 +1,11 @@
 #ifndef ROBOT_H
 #define ROBOT_H
 
+#if defined(__cplusplus)
+extern "C"
+{
+#endif
+
 #define ANIM_LEN 3
 #define SERVO_LEN 3
 
@@ -37,5 +42,9 @@ struct Leg
 void computeTransitions(struct Animation *animation);
 struct AnimationFrame computeState(struct Animation animation, int *ctr);
 void doLegs(void (*legFn)(struct Leg *));
+
+#if defined(__cplusplus)
+}
+#endif
 
 #endif
