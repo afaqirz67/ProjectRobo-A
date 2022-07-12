@@ -100,8 +100,6 @@ struct Leg leg5 = {
     0,
 };
 
-#define NUM_LEGS 2
-
 struct Leg *legs[NUM_LEGS] = {
     &leg1,
     &leg5,
