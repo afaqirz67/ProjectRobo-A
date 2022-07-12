@@ -1,23 +1,26 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
+#include "anim.h"
 
 #define __DEBUG
 
 #ifdef __PROFILE
-#define profile(name,thing) ({ \
-  int start = micros(); \
-  thing; \
-  int end = micros(); \
-  Serial.println(name); \
-  Serial.println(end - start); \
-  thing; \
+#define profile(name, thing) ({ \
+  int start = micros();         \
+  thing;                        \
+  int end = micros();           \
+  Serial.println(name);         \
+  Serial.println(end - start);  \
+  thing;                        \
 })
 #else
-#define profile(name,thing) (thing)
+#define profile(name, thing) (thing)
 #endif
 
 #ifdef __DEBUG
-#define debug(text, value) Serial.print(text); Serial.println(value)
+#define debug(text, value) \
+  Serial.print(text);      \
+  Serial.println(value)
 #else
 #define debug(text, value)
 #endif
@@ -30,138 +33,6 @@
 
 #define ANIM_LEN 3
 #define SERVO_LEN 3
-
-struct AnimationFrame
-{
-  // Servo degrees
-  float servos[SERVO_LEN];
-};
-
-// Transition rate between frames in degrees / ms
-struct AnimationTransition
-{
-  float servos[SERVO_LEN];
-};
-
-struct Animation
-{
-  struct AnimationFrame frames[ANIM_LEN];
-  int transitionTimes[ANIM_LEN];
-  struct AnimationTransition transitions[ANIM_LEN];
-};
-
-void computeTransitions(struct Animation *animation)
-{
-  for (int current = 0; current < ANIM_LEN; ++current)
-  {
-    int next = (current + 1) % ANIM_LEN;
-
-    struct AnimationFrame currentFrame = animation->frames[current];
-    struct AnimationFrame nextFrame = animation->frames[next];
-    int transitionMs = animation->transitionTimes[current];
-
-    struct AnimationTransition transition = {0, 0, 0};
-
-    for (int servo = 0; servo < SERVO_LEN; ++servo)
-    {
-      transition.servos[servo] = ((float)nextFrame.servos[servo] - (float)currentFrame.servos[servo]) / (float)transitionMs;
-    }
-
-    animation->transitions[current] = transition;
-  }
-}
-
-struct AnimationFrame computeState(struct Animation animation, int *ctr)
-{
-  int total = 0;
-  for (int i = 0; i < ANIM_LEN; i++)
-  {
-    total += animation.transitionTimes[i];
-  }
-
-  *ctr %= total;
-
-  int tmpCtr = *ctr;
-
-  // Find the frame that we should be in given the current counter
-  int frame;
-  for (frame = 0; frame < ANIM_LEN; frame++)
-  {
-    int thisTime = animation.transitionTimes[frame];
-    if (tmpCtr < thisTime)
-    {
-      break;
-    }
-    tmpCtr -= thisTime;
-  }
-  // state -> last keyframe/transition
-  struct AnimationFrame lastKey = animation.frames[frame];
-  struct AnimationTransition trans = animation.transitions[frame];
-
-  // tmpCtr -> offset from the start of the state
-  struct AnimationFrame outState;
-
-  for (int s = 0; s < SERVO_LEN; s++)
-  {
-    outState.servos[s] = lastKey.servos[s] + trans.servos[s] * tmpCtr;
-  }
-
-  return outState;
-}
-
-struct Leg
-{
-  // servo indices
-  int servos[SERVO_LEN];
-
-  struct Animation animation;
-
-  int state;
-  int counter;
-};
-
-struct Leg leg1 = {
-    // Servo indices
-    {16, 17, 18},
-    // Animation
-    {
-        // Frames
-     {
-            {20, 45, 55},
-            {30, 55, 55},
-            {40, 45, 55},
-        },
-        // Timing
-        {1000000, 500000, 1000000},
-    },
-    // state
-    0,
-    // counter
-    0,
-};
-
-struct Leg leg5 = {
-  // Servo indices
-  {19, 20 ,21},
-  // Animation
-  {
-
-    // Frames
-   {  
-    {15, 35, 80},
-    {25, 45, 80},
-    {35, 35, 80},
-    },
-    //Timing
-    {1000000, 500000, 1000000},
-    },
-    // state
-    0,
-    // counter
-    0,
-  };
-  
-
 
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
@@ -216,8 +87,8 @@ void setAngle(
     uint8_t degrees)
 
 {
-  debug("servo ",servoNum);
-  debug("degrees ",degrees);
+  debug("servo ", servoNum);
+  debug("degrees ", degrees);
   Adafruit_PWMServoDriver p;
   int n;
   findServo(servoNum, &p, &n);
@@ -225,11 +96,14 @@ void setAngle(
   p.setPWM(n, 0, pulselength);
 }
 
+void computeLegAnimations(struct Leg* leg) {
+  computeTransitions(&leg1->animation);
+}
+
 void setup()
 {
   pinMode(LED_BUILTIN, OUTPUT);
-  computeTransitions(&leg1.animation);
-  computeTransitions(&leg5.animation);
+  doLegs(computeLegAnimations);
 
   // Debug console
   Serial.begin(115200);
@@ -304,6 +178,7 @@ unsigned long last = 0;
 
 void outputLeg(struct Leg *leg)
 {
+  leg->counter += (now - last);
   struct AnimationFrame state = computeState(leg->animation, &leg->counter);
   for (int s = 0; s < SERVO_LEN; s++)
   {
@@ -325,10 +200,6 @@ void loop()
 
   int change = now - last;
   debug("loop time", change);
-  leg1.counter += change;
-  leg5.counter += change;
-  profile("leg1", outputLeg(&leg1));
-  profile("leg5", outputLeg(&leg5));
 
-  //outputLeg(&leg3);
+  doLegs(outputLeg);
 }
