@@ -35,7 +35,7 @@ struct AnimationFrame computeState(struct Animation animation, int *ctr)
 
   // Find the frame that we should be in given the current counter
   int frame;
-  for (frame = 0; frame < ANIM_LEN; frame++)  
+  for (frame = 0; frame < ANIM_LEN; frame++)
   {
     int thisTime = animation.transitionTimes[frame];
     if (tmpCtr < thisTime)
@@ -59,71 +59,55 @@ struct AnimationFrame computeState(struct Animation animation, int *ctr)
   return outState;
 }
 
+float offsets[ANIM_LEN][SERVO_LEN] = {
+    {0, 0, 0},
+    {10, 10, 0},
+    {20, 0, 0},
+};
+
+struct Animation calcAnimation(float inits[SERVO_LEN])
+{
+  struct Animation ret = {
+      {},
+      {1000000, 500000, 1000000},
+      {},
+  };
+
+  for (int i = 0; i < ANIM_LEN; ++i)
+  {
+    for (int j = 0; j < SERVO_LEN; ++j)
+    {
+      ret.frames[i].servos[j] = inits[j] + offsets[i][j];
+    }
+  }
+
+  computeTransitions(&ret);
+
+  return ret;
+}
+
+void initLeg(struct Leg *leg)
+{
+  leg->animation = calcAnimation(leg->init);
+  leg->counter = 0;
+  leg->state = 0;
+}
+
 struct Leg leg1 = {
     // Servo indices
     {16, 17, 18},
-    // Animation
-    {
-        // Frames
-        {
-            {20, 45, 55},
-            {30, 55, 55},
-            {40, 45, 55},
-        },
-        // Timing
-        {1000000, 500000, 1000000},
-    },
-    // state
-    0,
-    // counter
-    0,
+    {20, 45, 55},
 };
-
 
 struct Leg leg3 = {
-    // Servo indices
     {19, 20, 21},
-    // Animation
-    {
-
-        // Frames
-        {
-            {15, 25, 80},
-            {25, 35, 80},
-            {35, 25, 80},
-        },
-        // Timing
-        {1000000, 500000, 1000000},
-    },
-    // state
-    0,
-    // counter
-    0,
+    {15, 25, 80},
 };
-
-
 
 struct Leg leg5 = {
-    // Servo indices
     {22, 23, 24},
-    // Animation
-    {
-
-        // Frames
-        {
-            {25, 35, 70},
-            {35, 45, 70},
-            {45, 35, 70},
-        },
-        // Timing
-        {1000000, 500000, 1000000},
-    },
-    // state
-    0,
-    // counter
-    0,
+    {25, 35, 70},
 };
-
 
 struct Leg *legs[NUM_LEGS] = {
     &leg1,

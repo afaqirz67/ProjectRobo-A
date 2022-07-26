@@ -10,40 +10,40 @@ extern "C"
 #define SERVO_LEN 3
 #define NUM_LEGS 3
 
+	struct AnimationFrame
+	{
+		// Servo degrees
+		float servos[SERVO_LEN];
+	};
 
-struct AnimationFrame
-{
-	// Servo degrees
-	float servos[SERVO_LEN];
-};
+	// Transition rate between frames in degrees / ms
+	struct AnimationTransition
+	{
+		float servos[SERVO_LEN];
+	};
 
-// Transition rate between frames in degrees / ms
-struct AnimationTransition
-{
-	float servos[SERVO_LEN];
-};
+	struct Animation
+	{
+		struct AnimationFrame frames[ANIM_LEN];
+		int transitionTimes[ANIM_LEN];
+		struct AnimationTransition transitions[ANIM_LEN];
+	};
 
-struct Animation
-{
-	struct AnimationFrame frames[ANIM_LEN];
-	int transitionTimes[ANIM_LEN];
-	struct AnimationTransition transitions[ANIM_LEN];
-};
+	struct Leg
+	{
+		// servo indices
+		int servos[SERVO_LEN];
+		float init[SERVO_LEN];
 
-struct Leg
-{
-	// servo indices
-	int servos[SERVO_LEN];
+		struct Animation animation;
 
-	struct Animation animation;
+		int state;
+		int counter;
+	};
 
-	int state;
-	int counter;
-};
-
-void computeTransitions(struct Animation *animation);
-struct AnimationFrame computeState(struct Animation animation, int *ctr);
-void doLegs(void (*legFn)(struct Leg *));
+	void initLeg(struct Leg *leg);
+	struct AnimationFrame computeState(struct Animation animation, int *ctr);
+	void doLegs(void (*legFn)(struct Leg *));
 
 #if defined(__cplusplus)
 }

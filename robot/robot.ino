@@ -1,4 +1,4 @@
-  #include <Wire.h>
+#include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include "anim.h"
 
@@ -96,15 +96,10 @@ void setAngle(
   p.setPWM(n, 0, pulselength);
 }
 
-void computeLegAnimations(struct Leg *leg)
-{
-  computeTransitions(&leg->animation);
-}
-
 void setup()
 {
   pinMode(LED_BUILTIN, OUTPUT);
-  doLegs(computeLegAnimations);
+  doLegs(initLeg);
 
   // Debug console
   Serial.begin(115200);
