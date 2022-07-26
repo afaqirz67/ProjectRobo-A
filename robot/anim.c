@@ -35,7 +35,7 @@ struct AnimationFrame computeState(struct Animation animation, int *ctr)
 
   // Find the frame that we should be in given the current counter
   int frame;
-  for (frame = 0; frame < ANIM_LEN; frame++)
+  for (frame = 0; frame < ANIM_LEN; frame++)  
   {
     int thisTime = animation.transitionTimes[frame];
     if (tmpCtr < thisTime)
@@ -79,7 +79,8 @@ struct Leg leg1 = {
     0,
 };
 
-struct Leg leg5 = {
+
+struct Leg leg3 = {
     // Servo indices
     {19, 20, 21},
     // Animation
@@ -87,9 +88,9 @@ struct Leg leg5 = {
 
         // Frames
         {
-            {15, 35, 80},
-            {25, 45, 80},
-            {35, 35, 80},
+            {15, 25, 80},
+            {25, 35, 80},
+            {35, 25, 80},
         },
         // Timing
         {1000000, 500000, 1000000},
@@ -100,8 +101,33 @@ struct Leg leg5 = {
     0,
 };
 
+
+
+struct Leg leg5 = {
+    // Servo indices
+    {22, 23, 24},
+    // Animation
+    {
+
+        // Frames
+        {
+            {25, 35, 70},
+            {35, 45, 70},
+            {45, 35, 70},
+        },
+        // Timing
+        {1000000, 500000, 1000000},
+    },
+    // state
+    0,
+    // counter
+    0,
+};
+
+
 struct Leg *legs[NUM_LEGS] = {
     &leg1,
+    &leg3,
     &leg5,
 };
 
