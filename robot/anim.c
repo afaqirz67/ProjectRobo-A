@@ -61,7 +61,7 @@ struct AnimationFrame computeState(struct Animation animation, int *ctr)
 
 float offsets[ANIM_LEN][SERVO_LEN] = {
     {0, 0, 0},
-    {10, 10, 0},
+    {10, 10, 20},
     {20, 0, 0},
 };
 
@@ -109,10 +109,11 @@ struct Leg leg5 = {
     {25, 35, 70},
 };
 
+
 struct Leg *legs[NUM_LEGS] = {
     &leg1,
-    &leg3,
-    &leg5,
+    //&leg3,
+    //&leg5,
 };
 
 void doLegs(void (*legFn)(struct Leg *))

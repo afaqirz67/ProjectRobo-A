@@ -8,7 +8,7 @@ extern "C"
 
 #define ANIM_LEN 3
 #define SERVO_LEN 3
-#define NUM_LEGS 3
+#define NUM_LEGS 1
 
 	struct AnimationFrame
 	{
