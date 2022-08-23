@@ -61,8 +61,10 @@ struct AnimationFrame computeState(struct Animation animation, int *ctr)
 
 float offsets[ANIM_LEN][SERVO_LEN] = {
     {0, 0, 0},
-    {10, 10, 20},
-    {20, 0, 0},
+    {0, 0, 0},
+    {0, 0, 0},
+    //{10, 30, 20},
+    //{20, 0, 0},
 };
 
 struct Animation calcAnimation(float inits[SERVO_LEN])
@@ -86,40 +88,71 @@ struct Animation calcAnimation(float inits[SERVO_LEN])
   return ret;
 }
 
-void initLeg(struct Leg *leg)
+void initLeg(int i, struct Leg *leg)
+
 {
   leg->animation = calcAnimation(leg->init);
-  leg->counter = 0;
-  leg->state = 0;
+  if (i %2 == 0) {
+    leg->counter = 0;
+  }else{
+    leg->counter = 1000000;
+
+    
+    }
 }
 
 struct Leg leg1 = {
     // Servo indices
     {16, 17, 18},
-    {20, 45, 55},
+    {35, 30, 80},
 };
 
 struct Leg leg3 = {
-    {19, 20, 21},
-    {15, 25, 80},
+    {19, 20, 31},
+    {15, 30, 90},
 };
 
 struct Leg leg5 = {
     {22, 23, 24},
-    {25, 35, 70},
+    {30, 75, 60},
 };
+
+
+
+
+struct Leg leg2 = {
+    {25, 26, 27},
+    {25, 35, 10},
+};
+
+struct Leg leg4 = {
+    {28, 29, 30},
+    {25, 62, 20},
+};
+
+struct Leg leg6 = {
+    {1, 2, 3},
+    {25, 62, 20},
+  };
 
 
 struct Leg *legs[NUM_LEGS] = {
-    &leg1,
+    //&leg1,
     //&leg3,
     //&leg5,
+    
+    //&leg2,
+    //&leg4,
+    &leg6,
 };
 
-void doLegs(void (*legFn)(struct Leg *))
+void doLegs(void (*legFn)(int, struct Leg *))
 {
+  
   for (int i = 0; i < NUM_LEGS; ++i)
+  
   {
-    (*legFn)(legs[i]);
+    
+    (*legFn)(i, legs[i]);
   }
 }

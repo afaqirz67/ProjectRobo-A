@@ -172,7 +172,7 @@ bool direction = false;
 unsigned long now = 0;
 unsigned long last = 0;
 
-void outputLeg(struct Leg *leg)
+void outputLeg(int i,struct Leg *leg)
 {
   leg->counter += (now - last);
   struct AnimationFrame state = computeState(leg->animation, &leg->counter);

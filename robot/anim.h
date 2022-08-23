@@ -41,9 +41,9 @@ extern "C"
 		int counter;
 	};
 
-	void initLeg(struct Leg *leg);
+	void initLeg(int i, struct Leg *leg);
 	struct AnimationFrame computeState(struct Animation animation, int *ctr);
-	void doLegs(void (*legFn)(struct Leg *));
+	void doLegs(void (*legFn)(int, struct Leg *));
 
 #if defined(__cplusplus)
 }
