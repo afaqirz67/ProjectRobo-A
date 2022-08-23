@@ -130,6 +130,13 @@ void setup()
   pwm2.setOscillatorFrequency(27000000);
   pwm2.setPWMFreq(SERVO_FREQ); // Analog servos run at ~50 Hz updates
 
+  for(int i = 0; i < 32; ++i) {
+    Adafruit_PWMServoDriver p;
+    int n;
+    findServo(servoNum, &p, &n);
+    p.setPin(n, 0);
+  }
+
   delay(10);
   // leg1.pwm = pwm;
   // leg1.index = 0;
