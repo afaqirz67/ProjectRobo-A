@@ -130,7 +130,8 @@ void setup()
   pwm2.setOscillatorFrequency(27000000);
   pwm2.setPWMFreq(SERVO_FREQ); // Analog servos run at ~50 Hz updates
 
-  for(int i = 0; i < 32; ++i) {
+  for (int i = 0; i < 32; ++i)
+  {
     Adafruit_PWMServoDriver p;
     int n;
     findServo(i, &p, &n);
@@ -179,13 +180,18 @@ bool direction = false;
 unsigned long now = 0;
 unsigned long last = 0;
 
-void outputLeg(int i,struct Leg *leg)
+void outputLeg(int i, struct Leg *leg)
 {
   leg->counter += (now - last);
   struct AnimationFrame state = computeState(leg->animation, &leg->counter);
   for (int s = 0; s < SERVO_LEN; s++)
   {
-    setAngle(leg->servos[s], (uint16_t)state.servos[s]);
+    uint16_t angle = (uint16_t)state.servos[s];
+    if (leg->reflect)
+    {
+      angle = 180 - angle;
+    }
+    setAngle(leg->servos[s], angle);
   }
 }
 

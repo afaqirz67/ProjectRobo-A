@@ -34,6 +34,7 @@ extern "C"
 		// servo indices
 		int servos[SERVO_LEN];
 		float init[SERVO_LEN];
+		int reflect;
 
 		struct Animation animation;
 

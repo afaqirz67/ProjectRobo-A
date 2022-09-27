@@ -92,55 +92,58 @@ void initLeg(int i, struct Leg *leg)
 
 {
   leg->animation = calcAnimation(leg->init);
-  if (i %2 == 0) {
+  if (i % 2 == 0)
+  {
     leg->counter = 0;
-  }else{
+  }
+  else
+  {
     leg->counter = 1000000;
-
-    
-    }
+  }
 }
 
 struct Leg leg1 = {
     // Servo indices
     {16, 17, 18},
     {90, 45, 105},
+    1,
 };
 
 struct Leg leg3 = {
     {19, 20, 21},
     {90, 57, 100},
+    1,
 };
 
 struct Leg leg5 = {
     {22, 23, 24},
     {90, 60, 90},
+    1,
 };
-
-
-
 
 struct Leg leg2 = {
     {25, 26, 27},
     {90, 35, 10},
+    0,
 };
 
 struct Leg leg4 = {
     {28, 29, 30},
     {50, 20, 20},
+    0,
 };
 
 struct Leg leg6 = {
     {0, 1, 2},
     {60, 62, 30},
-  };
-
+    0,
+};
 
 struct Leg *legs[NUM_LEGS] = {
     //&leg1,
     //&leg3,
     //&leg5,
-    
+
     &leg2,
     &leg4,
     //&leg6,
@@ -148,11 +151,11 @@ struct Leg *legs[NUM_LEGS] = {
 
 void doLegs(void (*legFn)(int, struct Leg *))
 {
-  
+
   for (int i = 0; i < NUM_LEGS; ++i)
-  
+
   {
-    
+
     (*legFn)(i, legs[i]);
   }
 }
