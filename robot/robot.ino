@@ -133,7 +133,7 @@ void setup()
   for(int i = 0; i < 32; ++i) {
     Adafruit_PWMServoDriver p;
     int n;
-    findServo(servoNum, &p, &n);
+    findServo(i, &p, &n);
     p.setPin(n, 0);
   }
 

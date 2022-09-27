@@ -104,17 +104,17 @@ void initLeg(int i, struct Leg *leg)
 struct Leg leg1 = {
     // Servo indices
     {16, 17, 18},
-    {35, 30, 80},
+    {90, 45, 105},
 };
 
 struct Leg leg3 = {
-    {19, 20, 31},
-    {15, 30, 90},
+    {19, 20, 21},
+    {90, 57, 100},
 };
 
 struct Leg leg5 = {
     {22, 23, 24},
-    {30, 75, 60},
+    {90, 60, 90},
 };
 
 
@@ -122,17 +122,17 @@ struct Leg leg5 = {
 
 struct Leg leg2 = {
     {25, 26, 27},
-    {25, 35, 10},
+    {90, 35, 10},
 };
 
 struct Leg leg4 = {
     {28, 29, 30},
-    {25, 62, 20},
+    {50, 20, 20},
 };
 
 struct Leg leg6 = {
-    {1, 2, 3},
-    {25, 62, 20},
+    {0, 1, 2},
+    {60, 62, 30},
   };
 
 
@@ -141,9 +141,9 @@ struct Leg *legs[NUM_LEGS] = {
     //&leg3,
     //&leg5,
     
-    //&leg2,
-    //&leg4,
-    &leg6,
+    &leg2,
+    &leg4,
+    //&leg6,
 };
 
 void doLegs(void (*legFn)(int, struct Leg *))
