@@ -24,8 +24,13 @@ extern "C"
 
 	struct Animation
 	{
+		// "Keyframes," or states that the animation will move between.
 		struct AnimationFrame frames[ANIM_LEN];
+		// The time it should take to move from one keyframe to the next.
 		int transitionTimes[ANIM_LEN];
+		// The transition rate needed to go from one keyframe to the next over
+		// the time period.
+		// Calculated at runtime, not user-defined.
 		struct AnimationTransition transitions[ANIM_LEN];
 	};
 
