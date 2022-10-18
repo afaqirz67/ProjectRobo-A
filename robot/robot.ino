@@ -1,9 +1,7 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include "anim.h"
-
 #define __DEBUG
-
 #ifdef __PROFILE
 #define profile(name, thing) ({ \
   int start = micros();         \
@@ -13,6 +11,7 @@
   Serial.println(end - start);  \
   thing;                        \
 })
+
 #else
 #define profile(name, thing) (thing)
 #endif
@@ -37,6 +36,8 @@
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
 char auth[] = "pcL11CQSj4YmNVoMPNCXqoMQbgf7mECT";
+
+
 
 // called this way, it uses the default address 0x40
 Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver();
@@ -96,6 +97,10 @@ void setAngle(
   p.setPWM(n, 0, pulselength);
 }
 
+
+
+
+
 void setup()
 {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -103,6 +108,9 @@ void setup()
 
   // Debug console
   Serial.begin(115200);
+
+  
+  
   Serial.println("Waiting for connections...");
   Blynk.setDeviceName("Blynk");
 
@@ -142,6 +150,19 @@ void setup()
   // leg1.pwm = pwm;
   // leg1.index = 0;
   // resetLeg(&leg1);
+
+
+
+
+
+
+
+  
+
+
+
+
+  
 }
 
 BLYNK_WRITE(V1)
@@ -195,6 +216,8 @@ void outputLeg(int i, struct Leg *leg)
   }
 }
 
+
+
 void loop()
 {
   if (last == 0)
@@ -209,6 +232,5 @@ void loop()
 
   int change = now - last;
   debug("loop time", change);
-
   doLegs(outputLeg);
 }

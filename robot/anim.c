@@ -9,17 +9,16 @@ void computeTransitions(struct Animation *animation)
     struct AnimationFrame currentFrame = animation->frames[current];
     struct AnimationFrame nextFrame = animation->frames[next];
     int transitionMs = animation->transitionTimes[current];
-
     struct AnimationTransition transition = {0, 0, 0};
 
     for (int servo = 0; servo < SERVO_LEN; ++servo)
     {
       transition.servos[servo] = ((float)nextFrame.servos[servo] - (float)currentFrame.servos[servo]) / (float)transitionMs;
     }
-
     animation->transitions[current] = transition;
   }
 }
+
 
 struct AnimationFrame computeState(struct Animation animation, int *ctr)
 {
@@ -59,12 +58,14 @@ struct AnimationFrame computeState(struct Animation animation, int *ctr)
   return outState;
 }
 
+
+
+
+
 float offsets[ANIM_LEN][SERVO_LEN] = {
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    //{10, 30, 20},
-    //{20, 0, 0},
+    {0, 0, 0},  
+    {10, 30, 20},
+    {20, 0, 0},
 };
 
 struct Animation calcAnimation(float inits[SERVO_LEN])
@@ -104,58 +105,63 @@ void initLeg(int i, struct Leg *leg)
 
 struct Leg leg1 = {
     // Servo indices
-    {16, 17, 18},
+    {13, 14, 15},
     {90, 45, 105},
-    1,
+    0,
 };
 
 struct Leg leg3 = {
     {19, 20, 21},
-    {90, 57, 100},
-    1,
+    {90, 55, 95},
+    0,
 };
 
 struct Leg leg5 = {
     {22, 23, 24},
-    {90, 60, 90},
-    1,
+    {90, 43, 110},
+    0,
 };
+
+
 
 struct Leg leg2 = {
     {25, 26, 27},
-    {90, 35, 10},
-    0,
+    {90, 140, 20},
+    1,
 };
 
 struct Leg leg4 = {
     {28, 29, 30},
-    {50, 20, 20},
-    0,
+    {90, 140, 10},
+    1,
 };
 
 struct Leg leg6 = {
     {0, 1, 2},
-    {60, 62, 30},
-    0,
-};
+    {90, 140, 80},
+    1,
+  };
+
+
 
 struct Leg *legs[NUM_LEGS] = {
-    //&leg1,
-    //&leg3,
-    //&leg5,
-
+  //Right legs
+    &leg1,
+    &leg3,
+    &leg5,
+    
+  //Left legs
     &leg2,
     &leg4,
-    //&leg6,
+    &leg6,
 };
+
+
 
 void doLegs(void (*legFn)(int, struct Leg *))
 {
-
   for (int i = 0; i < NUM_LEGS; ++i)
-
   {
-
     (*legFn)(i, legs[i]);
   }
 }
