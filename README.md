@@ -1,16 +1,16 @@
 # ProjectRobo-A
 ## Introductory 
-As the name for this project suggest, this robot has 6 legs, each function with 3 servos for movement. This requires us 18 servos. The types of servos used for this robot is 
+As the name of this project suggests, this robot has 6 legs, each function with 3 servos for movement. This requires us 18 servos. The types of servos used for this robot are 
 MG996R Servo Motor. The MG996R is essentially an upgraded version of the famous MG995 servo, and features upgraded shock-proofing and a redesigned PCB and IC control system that 
-make it much more accurate than its predecessor. With that being said, this servo also has tail, and a head. This makes it look much like a real ant. The head is capable of seeing 
-with help of an ultrasonic sensor placed in the head. It's also capable of moving up and down, while moving left and right too. Moreover, with those movements, the head will be 
-able to rotate itself as well. That adds up 3 more servos. And one final servo is needed for the tail.  That brings up all the servos to a total of 23 servos. Though, the one 
-of these servos for the head rotation unlike the other servos, is a SG90 Micro Servo Motor. The brain for this robot is a Mega Arduino. The Mega Arduino would be the only one that 
+make it much more accurate than its predecessor. With that being said, this servo also has a tail and a head. This makes it look much like a real ant. The head is capable of seeing 
+with the help of an ultrasonic sensor placed in the head. It's also capable of moving up and down while moving left and right too. Moreover, with those movements, the head will be 
+able to rotate itself as well. That adds up to 3 more servos. And one final servo is needed for the tail.  That brings up all the servos to a total of 23 servos. However, one 
+of these servos for the head rotation unlike the other servos, is an SG90 Micro Servo Motor. The brain for this robot is a Mega Arduino. The Mega Arduino would be the only one that 
 would be able to support this many servos. For powering this robot, a 3S LiPo Battery. This battery has a voltage of around 12v. It's capable of powering all the servos even if 
-they were to run all at the same time. However, the servos operating voltage is limited from 4.8 to 7.2V, which means that we need to use a DC-DC buck converter to convert the 12V 
-to 5V. The buck converter that is used for this project can handle up to 8 amps of current. For the control of this robot. I will be using an app to connect with a Wifi Shield. 
-This gives the robot to be control via an IOS device, but just to back up this idea, having a Bluetooth Module isn't a bad idea. Although, the Bluetooth Module would be connected 
-with an Android device. If not one, the other will work for sure. But our main goal here is to make it work with an IOS device. Last but not least, the body parts are going to be 
+they were to run all at the same time. However, the servo operating voltage is limited from 4.8 to 7.2V, which means that we need to use a DC-DC buck converter to convert the 12V 
+to 5V. The buck converter used for this project can handle up to 8 amps of current. For the control of this robot. I will be using an app to connect with a Wi-Fi shield. 
+This allows the robot to be controlled via an IOS device, but just to back up this idea, having a Bluetooth Module isn't a bad idea. However, the Bluetooth Module would be connected 
+to an Android device. If not one, the other will work for sure. But our main goal here is to make it work with an IOS device. Last but not least, the body parts are going to be 
 3D printed.
 
 
@@ -47,9 +47,9 @@ HC-05 Bluetooth Module
 
 ## Deadlines
 
-Deadlines for this project will be in two phases each serving different parts of the project, but contain many shorter and more specific deadlines within. One would be building the robot and the parts, and the other would be coding and testing. All the deadlines are referred to in the timeline bellow.
+Deadlines for this project will be in two phases each serving different parts of the project, but contain many shorter and more specific deadlines within. One would be building the robot and the details, and the other would be coding and testing. All the deadlines are referred to in the timeline below.
 
-Designing the parts, 3d printing, and assembling them.
+Designing the parts, 3D printing, and assembling them.
 
 
 ![alt text](https://github.com/afaqirz67/ProjectRobo-A/blob/main/images/Project%20Robo-A%20deadlines.png?raw=true)
@@ -57,17 +57,17 @@ Designing the parts, 3d printing, and assembling them.
 
 ## Change in plan
 After some time and thinking about the desired output and the required input, I have come to the idea that my planning for the robot's interior design should be changed. The 
-change is caused by the fact that using a bluetooth shield in my design would require an Android device and app to control the and send signals to the robot's reciever. I wanted 
-my robot to be able to communicate with IOS devices and apps. To solve this issue, I thought of using a wifi shield and be able to control the robot with an IOS device, but it
-seemed that controlling the robot with a wifi would have slowed than the process of sending and recieving signals between the robot and the controller. For this issue to be
-solved, I chose to use an ESP32 microcontroller rather than the a wifi shield. I will be using using bluetooth for communication, which will provide the communication rate a 
-reasonable speed. Moreover, I will still be able to use an IOS device and app to control the robot. Obviously this change in design will effect the other parts too. The ESP32
+change is caused by the fact that using a Bluetooth shield in my design would require an Android device and app to control and send signals to the robot's receiver. I wanted 
+my robot to be able to communicate with IOS devices and apps. To solve this issue, I thought of using a wifi shield and being able to control the robot with an IOS device, but it
+seemed that controlling the robot with a wifi would have slowed the process of sending and receiving signals between the robot and the controller. For this issue to be
+solved, I chose to use an ESP32 microcontroller rather than a Wi-Fi shield. I will be using Bluetooth for communication, which will provide the communication rate at a 
+reasonable speed. Moreover, I will still be able to use an IOS device and app to control the robot. Obviously, this change in design will affect the other parts too. The ESP32
 microcontroller will be replacing the Arduino Mega board, but there would be another issue caused by that. The ESP32 won't be able to replace the Mega board by itself because it 
 doesn't have the capability of controlling 22 servos. In order to solve this issue, I will be using servo drivers. The specific board would be the Adafruit 16-Channel 12-bit
 PWM/Servo Driver which has the capability of running 16 servos, so I'll be using two of them. A buck converter would be needed to convert the power to 3.3 for the ESP32
-board. And the servos will be powerd by both the ESP board and the servo drivers which each recieve 6v of power. The last change would be the battery. For this design I would be
-using 4 double A batteries to power up the servos and the boards. Moreover, the customization of the boards will cause a change in the robots inerior part design, so that the 
-new boards can fit in it easily. A battery holder will be placed in the bottom part of the body, so that replacing the battries wouldn't require any extra work. The flowchart
+board. The servos will be powered by both the ESP board and the servo drivers which each receive 6v of power. The last change would be the battery. For this design, I would be
+using 4 double A batteries to power up the servos and the boards. Moreover, the customization of the boards will cause a change in the robots' interior part design, so that the 
+new boards can fit in it easily. A battery holder will be placed in the bottom part of the body so that replacing the batteries won't require any extra work. The flowchart
 below shows a better picture of what this design looks like. 
 
 
@@ -98,7 +98,7 @@ M4 bolts and nuts and washers x 15
 
 
 ## Pictures of final CAD design
-The design of particular parts, especially the interior, had to be changed due to the changes of microcontrollers inside. The space inside was modified to place in the AA 
+The design of particular parts, especially the interior, had to be changed due to the changes of microcontrollers inside. The space inside was modified to be placed in the AA 
 battery pack, servo drivers, ESP-32, and the breadboard accordingly.
 
 ![Robo-A full ](https://user-images.githubusercontent.com/56890879/135955293-255680c7-2bed-497a-92ce-4f4a4916a33f.png)
@@ -106,15 +106,15 @@ battery pack, servo drivers, ESP-32, and the breadboard accordingly.
 ![roboA](https://user-images.githubusercontent.com/56890879/135955348-a9b5378b-156d-45b3-9b89-4e940c9589e2.png)
 
 ## Change in plan
-We need to switch to more powerful batteries because the AA batteries could not supply enough current to keep the servos running. Instead we are going to use a 7.4v 
+We need to switch to more powerful batteries because the AA batteries could not supply enough current to keep the servos running. Instead, we are going to use a 7.4v 
 lipo battery with 5200 mah of current & a discharge rate of 50C. This battery will be able to meet the demands of the servos. The thing we had accounted for last time 
 was that the servos draw current even when they are not running, but that wasn't the issue as it was drawing only 7mA. The issue was when the servos would get close
 to their stall current & it would be reasonable to think that because the robot is heavy. The stall current of the servos we are using is 1100mA. Multiply that to 22 
 servos and it would drastically exceed the amount of current the AA batteries can supply at once. Even if 3 legs are running at a time - the rest of the legs are still 
-drawing current since they are under load. Therefore we are using a lipo battery with higher ampere and higher discharge rate so that it meets the needs. 
+drawing current since they are under load. Therefore we are using a lipo battery with a higher ampere and higher discharge rate so that it meets the needs. 
 
 Since we'll be using a 7.4v battery and we only need 5-6 volts of power, we'll be using a 6-40V to 1.2-36V 20A voltage regulator, so the battery only supplies the 
-exact amount of power needed.
+the exact amount of power needed.
 
 [Battery](https://www.amazon.com/POVWAY-Battery-5200mAh-Trucks-Vehicles/dp/B08RYNT234/ref=sr_1_26?crid=24WYA8KKDSMCX&keywords=2s+lipo&qid=1648590463&sprefix=2s+lipo%2Caps%2C87&sr=8-26)
 
@@ -145,7 +145,7 @@ struct AnimationFrame {
   float servos[SERVO_LEN];
 };
 
-// Transition between frames in degrees / ms
+// Transition between frames in degrees/ms
 struct AnimationTransition {
   float servos[SERVO_LEN];
 };
